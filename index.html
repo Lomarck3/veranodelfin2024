@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realidad Aumentada</title>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script>
+        AFRAME.registerComponent('markerhandler',{
+            init: function(){
+                this.el.sceneEl.addEventListener('markerFound',()=>{
+                    console.log("Marcador Encontrado");
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+    <a-scene 
+        embedded
+        renderer="logarithmicDepthBuffer:true; precision:high;" 
+        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
+        <a-assets>
+            <!-- <a-sset-item id="modelo1" src="assets/models/Voltorb.glb"></a-sset-item>-->
+        </a-assets>
+        <a-marker markerhandler preset="hiro">
+            <a-box width="1" height="1" depth="1" material="color:green; opacity:0.8; transparent:true;" ></a-box>
+            <!--<a-entity scale="0.1 0.1 0.1" rotation="-90 0 0" gltf-model="#modelo1"></a-entity>-->
+        </a-marker>
+        <a-entity camera></a-entity> 
+    </a-scene>
+</body>
+</html>
